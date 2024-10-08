@@ -1,7 +1,7 @@
-﻿using SQLite;
-using System.Linq.Expressions;
+﻿namespace FinantsApp.Data;
 
-namespace FintantsApp.Data;
+using SQLite;
+using System.Linq.Expressions;
 
 public class DatabaseContext : IAsyncDisposable
 {
