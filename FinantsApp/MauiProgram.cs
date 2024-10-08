@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FinantsApp.Data;
+using FinantsApp.ServiceInterface;
+using FinantsApp.ApplicationServices;
+using Microsoft.Extensions.Logging;
 
 namespace FinantsApp
 {
@@ -14,6 +17,9 @@ namespace FinantsApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton<DatabaseContext>();
+            builder.Services.AddSingleton<ITransactionService, TransactionService>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
