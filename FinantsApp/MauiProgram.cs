@@ -25,7 +25,22 @@ namespace FinantsApp
     		builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+            InitializeDatabase(app.Services.GetRequiredService<ITransactionService>()).Wait();
+            return app;
+        }
+
+        // Add dummy data to databse if it's empty.
+        private static async Task InitializeDatabase(ITransactionService service)
+        {
+            var all = await service.GetAllTransactionsAsync();
+
+            if (all.Any())
+            {
+                return;
+            }
+
+
         }
     }
 }
