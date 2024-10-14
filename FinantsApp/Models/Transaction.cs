@@ -12,7 +12,20 @@ public class Transaction
     public string? Description { get; set; }
     public DateTime Date { get; set; }
 
-    public bool IsIncome => Amount > 0;
+    public bool IsIncome { 
+        get 
+        {
+            return Reason switch
+            {
+                TransactionReason.Salary 
+                    or TransactionReason.Bonus 
+                    or TransactionReason.Gift 
+                    or TransactionReason.InvestmentReturn => true,
+
+                _ => false,
+            };
+        } 
+    }
 }
 
 public enum TransactionReason

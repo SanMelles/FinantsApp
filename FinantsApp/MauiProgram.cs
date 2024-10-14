@@ -1,4 +1,5 @@
 ﻿using FinantsApp.Data;
+using FinantsApp.Models;
 using FinantsApp.ServiceInterface;
 using FinantsApp.ApplicationServices;
 using Microsoft.Extensions.Logging;
@@ -26,7 +27,13 @@ namespace FinantsApp
 #endif
 
             var app = builder.Build();
-            InitializeDatabase(app.Services.GetRequiredService<ITransactionService>()).Wait();
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                var service = app.Services.GetRequiredService<ITransactionService>();
+                await InitializeDatabase(service);
+            });
+
             return app;
         }
 
@@ -40,7 +47,35 @@ namespace FinantsApp
                 return;
             }
 
+            Transaction[] transactions =
+            {
+                new()
+                {
+                    Amount = 10.0m,
+                    Reason = TransactionReason.Entertainment,
+                    Description = "Cinema Ticket",
+                    Date = DateTime.Now
+                },
+                new()
+                {
+                    Amount = 1234.5m,
+                    Reason = TransactionReason.Salary,
+                    Description = "Job at big mega corp",
+                    Date = DateTime.Now
+                },
+                new()
+                {
+                    Amount = 377.47m,
+                    Reason = TransactionReason.LivingCosts,
+                    Description = "Rent",
+                    Date = DateTime.Now
+                }
+            };
 
+            foreach (var item in transactions)
+            {
+                await service.AddTransaction(item);
+            }
         }
     }
 }

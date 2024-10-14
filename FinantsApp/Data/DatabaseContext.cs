@@ -5,16 +5,38 @@ using System.Linq.Expressions;
 
 public class DatabaseContext : IAsyncDisposable
 {
-    private const string DbName = "TransactionsDb";
+    private const string DbName = "TransactionsDb.db";
     private static string DbPath => Path.Combine(".", DbName);
 
     private SQLiteAsyncConnection _connection;
-    private SQLiteAsyncConnection Database => (_connection ??= new SQLiteAsyncConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache));
+    private SQLiteAsyncConnection Database => (_connection ??= CreateConnection());
+
+    private static SQLiteAsyncConnection CreateConnection()
+    {
+        try
+        {
+            return new SQLiteAsyncConnection(DbPath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            throw;
+        }
+    }
 
     public async Task<IEnumerable<TTable>> GetAllAsync<TTable>() where TTable : class, new()
     {
-        var table = await GetTableAsync<TTable>();
-        return await table.ToListAsync();
+        try
+        {
+            var table = await GetTableAsync<TTable>();
+            var t = await table.ToListAsync();
+            return t;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            throw;
+        }
     }
 
     private async Task<AsyncTableQuery<TTable>> GetTableAsync<TTable>() where TTable : class, new()
@@ -25,6 +47,7 @@ public class DatabaseContext : IAsyncDisposable
 
     private async Task CreateTableIfNotExists<TTable>() where TTable : class, new()
     {
+        Database.Table<TTable>();
         await Database.CreateTableAsync<TTable>();
     }
 
