@@ -8,7 +8,7 @@ public class DatabaseContext : IAsyncDisposable
     private const string DbName = "TransactionsDb.db";
     private static string DbPath => Path.Combine(".", DbName);
 
-    private SQLiteAsyncConnection _connection;
+    private SQLiteAsyncConnection? _connection;
     private SQLiteAsyncConnection Database => (_connection ??= CreateConnection());
 
     private static SQLiteAsyncConnection CreateConnection()
@@ -85,7 +85,15 @@ public class DatabaseContext : IAsyncDisposable
         return await Database.DeleteAsync<TTable>(primaryKey) > 0;
     }
 
-    public async ValueTask DisposeAsync() => await _connection.CloseAsync();
+    public async ValueTask DisposeAsync()
+    {
+        if (_connection == null)
+        {
+            return;
+        }
+
+        await _connection.CloseAsync();
+    }
 
     public async Task<IEnumerable<TTable>> GetFilteredAsync<TTable>(Expression<Func<TTable, bool>> predicate) where TTable : class, new()
     {

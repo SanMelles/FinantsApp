@@ -30,6 +30,18 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+            <Button
+                x:Name="GoToListBtn"
+                Text="Goto List" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnListOpen"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="GoToDifferenceBtn"
+                Text="Goto Income difference" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnDifferenceOpen"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

@@ -2,6 +2,7 @@
 using FinantsApp.Models;
 using FinantsApp.ServiceInterface;
 using FinantsApp.ApplicationServices;
+using FinantsApp.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace FinantsApp
@@ -21,6 +22,10 @@ namespace FinantsApp
 
             builder.Services.AddSingleton<DatabaseContext>();
             builder.Services.AddSingleton<ITransactionService, TransactionService>();
+            builder.Services.AddSingleton<TransactionsViewModel>();
+            builder.Services.AddSingleton<TransactionsListPage>();
+            builder.Services.AddSingleton<TransactionsDifferencePage>();
+            builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
