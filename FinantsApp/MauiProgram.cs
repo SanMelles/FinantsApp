@@ -1,7 +1,5 @@
 ﻿using FinantsApp.Data;
 using FinantsApp.Models;
-using FinantsApp.ServiceInterface;
-using FinantsApp.ApplicationServices;
 using FinantsApp.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -21,7 +19,6 @@ namespace FinantsApp
                 });
 
             builder.Services.AddSingleton<DatabaseContext>();
-            builder.Services.AddSingleton<ITransactionService, TransactionService>();
             builder.Services.AddSingleton<TransactionsViewModel>();
             builder.Services.AddSingleton<TransactionsListPage>();
             builder.Services.AddSingleton<TransactionsDifferencePage>();
@@ -35,7 +32,7 @@ namespace FinantsApp
 
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                var service = app.Services.GetRequiredService<ITransactionService>();
+                var service = app.Services.GetRequiredService<DatabaseContext>();
                 await InitializeDatabase(service);
             });
 
@@ -43,9 +40,9 @@ namespace FinantsApp
         }
 
         // Add dummy data to databse if it's empty.
-        private static async Task InitializeDatabase(ITransactionService service)
+        private static async Task InitializeDatabase(DatabaseContext service)
         {
-            var all = await service.GetAllTransactionsAsync();
+            var all = await service.GetAllAsync<Transaction>();
 
             if (all.Any())
             {
@@ -79,7 +76,7 @@ namespace FinantsApp
 
             foreach (var item in transactions)
             {
-                await service.AddTransaction(item);
+                await service.AddItemAsync(item);
             }
         }
     }

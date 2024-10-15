@@ -4,16 +4,16 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Text;
-using FinantsApp.ServiceInterface;
 using FinantsApp.Models;
+using FinantsApp.Data;
 
 namespace FinantsApp.ViewModels
 {
     public partial class TransactionsViewModel: ObservableObject
     {
-        private readonly ITransactionService _service;
+        private readonly DatabaseContext _service;
 
-        public TransactionsViewModel(ITransactionService service)
+        public TransactionsViewModel(DatabaseContext service)
         {
             _service = service;
         }
@@ -35,7 +35,7 @@ namespace FinantsApp.ViewModels
 
         public async Task LoadAsync()
         {
-            IEnumerable<Transaction> res = await _service.GetAllTransactionsAsync();
+            IEnumerable<Transaction> res = await _service.GetAllAsync<Transaction>();
             
             if (Transactions == null)
             {
