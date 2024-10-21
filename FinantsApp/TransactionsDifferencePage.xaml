@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinantsApp.TransactionsDifferencePage"
-             Title="TransactionsDifferencePage">
+             Title="Transactions Differences">
     <VerticalStackLayout Padding="10">
         <!-- Display total income, expenses, and difference -->
         <Label Text="Total Income:" FontSize="Medium" />
         <Label Text="{Binding TotalIncome, StringFormat='{0:C2}'}" TextColor="Green" FontSize="Large" FontAttributes="Bold" />
 
         <Label Text="Total Expenses:" FontSize="Medium" />
-        <Label Text="{Binding TotalExpenses, StringFormat='{0:C2}'}" TextColor="Red" FontSize="Large" FontAttributes="Bold" />
+        <Label Text="{Binding TotalExpenses, StringFormat='-{0:C2}'}" TextColor="Red" FontSize="Large" FontAttributes="Bold" />
 
         <Label Text="Difference (Income - Expenses):" FontSize="Medium" />
         <Label Text="{Binding IncomeDifference, StringFormat='{0:C2}'}" TextColor="Green" FontSize="Large" FontAttributes="Bold">
