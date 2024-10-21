@@ -4,16 +4,16 @@
              x:Class="FinantsApp.TransactionsListPage"
              Title="Transactions List">
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Transactions}"
+        <CollectionView ItemsSource="{Binding SortedTransactions}"
                             SelectionMode="Single"
                             SelectionChanged="OnTransactionSelectionChanged"
                             Margin="20">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="5,5,5,5" Padding="10" BorderColor="Gray" CornerRadius="5">
+                    <Frame Margin="5,5,5,5" Padding="10" BorderColor="Gray" BackgroundColor="{StaticResource highlight-dark}" CornerRadius="5">
                         <StackLayout>
                             <Label Text="{Binding Date, StringFormat='{}{0:MM/dd/yyyy}'}" FontAttributes="Bold"/>
-                            <Label Text="{Binding Description}" TextColor="Gray"/>
+                            <Label Text="{Binding Description}" TextColor="{StaticResource text-dimmed}"/>
                             <Label Text="{Binding Amount, StringFormat='{0:C2}'}" FontSize="Medium" TextColor="Green">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" 
@@ -24,7 +24,7 @@
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
-                            <Label Text="{Binding Reason}" TextColor="DarkGray"/>
+                            <Label Text="{Binding Reason}" TextColor="{StaticResource text-dimmed}"/>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
