@@ -22,6 +22,9 @@ namespace FinantsApp.ViewModels
         private ObservableCollection<Transaction> _transactions = [];
 
         [ObservableProperty]
+        private ObservableCollection<Transaction> _sortedTransactions = [];
+
+        [ObservableProperty]
         private decimal _totalIncome = 0;
 
         [ObservableProperty]
@@ -62,6 +65,8 @@ namespace FinantsApp.ViewModels
                     TotalExpenses += transaction.Amount;
                 }
             }
+
+            SortedTransactions = new(Transactions.OrderByDescending(x => x.Date));
 
             IncomeDifference = TotalIncome - TotalExpenses;
             IncomeGreaterThanExpenses = IncomeDifference > 0;
