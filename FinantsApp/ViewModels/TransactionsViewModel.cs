@@ -71,5 +71,15 @@ namespace FinantsApp.ViewModels
             IncomeDifference = TotalIncome - TotalExpenses;
             IncomeGreaterThanExpenses = IncomeDifference > 0;
         }
+
+        public async Task AddTransaction(Transaction transaction)
+        {
+            await _service.AddItemAsync(transaction);
+        }
+
+        public async Task UpdateTransaction(Transaction transaction)
+        {
+            await _service.UpdateItemAsync(transaction);
+        }
     }
 }

@@ -8,6 +8,11 @@
                             SelectionMode="Single"
                             SelectionChanged="OnTransactionSelectionChanged"
                             Margin="20">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="5" Orientation="Vertical">
+                </LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="5,5,5,5" Padding="10" BorderColor="Gray" BackgroundColor="{StaticResource highlight-dark}" CornerRadius="5">

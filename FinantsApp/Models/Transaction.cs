@@ -1,6 +1,7 @@
 ﻿namespace FinantsApp.Models;
 
 using SQLite;
+using System.ComponentModel.DataAnnotations;
 
 public class Transaction
 {
@@ -41,5 +42,6 @@ public enum TransactionReason
     Entertainment,
     Transportation,
 
-    Other
+    OtherExpense,
+    OtherIncome
 }

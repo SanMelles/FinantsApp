@@ -42,6 +42,12 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnDifferenceOpen"
                 HorizontalOptions="Fill" />
+            <Button
+                x:Name="addTrans"
+                Text="Add New Transaction" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnAddNewTransaction"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

@@ -68,6 +68,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AddTransactionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="TransactionsDifferencePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

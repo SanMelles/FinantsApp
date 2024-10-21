@@ -22,6 +22,7 @@ namespace FinantsApp
             builder.Services.AddSingleton<TransactionsViewModel>();
             builder.Services.AddSingleton<TransactionsListPage>();
             builder.Services.AddSingleton<TransactionsDifferencePage>();
+            builder.Services.AddSingleton<AddTransactionPage>();
             builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
@@ -137,7 +138,7 @@ namespace FinantsApp
                 },
                 new() { 
                     Amount = 500.00m, 
-                    Reason = TransactionReason.Other, 
+                    Reason = TransactionReason.OtherIncome, 
                     Description = "Freelance project", 
                     Date = new DateTime(2024, 4, 5) 
                 },
