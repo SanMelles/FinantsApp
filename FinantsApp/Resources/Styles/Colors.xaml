@@ -7,16 +7,19 @@
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
     <Color x:Key="highlight-dark">#222831</Color>
-    <Color x:Key="accent">#6136b3</Color>
+    <Color x:Key="accent">#40534C</Color>
     <Color x:Key="text">#EEEEEE</Color>
     <Color x:Key="text-dimmed">#c9c9c9</Color>
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
-    <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Primary">#4E9F3D</Color>
+    <Color x:Key="PrimaryDark">#1E5128</Color>
+    <Color x:Key="PrimaryDarkText">#191A19</Color>
+    <Color x:Key="Secondary">#4E9F3D</Color>
+    <Color x:Key="SecondaryDarkText">#4E9F3D</Color>
+    <Color x:Key="Tertiary">#1E5128</Color>
+
+    <Color x:Key="MoneyGood">#4E9F3D</Color>
+    <Color x:Key="MoneyBad">Red</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
