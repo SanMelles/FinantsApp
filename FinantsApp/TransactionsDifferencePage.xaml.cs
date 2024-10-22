@@ -18,4 +18,9 @@ public partial class TransactionsDifferencePage : ContentPage
         base.OnAppearing();
         await _viewModel.LoadAsync();
     }
+
+	async void OnSummarySelect(object sender, EventArgs e)
+	{
+
+	}
 }
