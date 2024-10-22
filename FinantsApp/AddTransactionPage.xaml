@@ -31,7 +31,7 @@
             <Button Text="Submit" Clicked="OnSubmitClicked"/>
 
             <!-- Delete Button -->
-            <Button Text="Delete Transaction" Clicked="OnDeleteTransaction" BackgroundColor="Red"/>
+            <Button x:Name="DelButton" Text="Delete Transaction" Clicked="OnDeleteTransaction" BackgroundColor="Red"/>
 
         </StackLayout>
     </ContentPage.Content>

@@ -81,5 +81,10 @@ namespace FinantsApp.ViewModels
         {
             await _service.UpdateItemAsync(transaction);
         }
+
+        public async Task DeleteTransaction(Transaction transaction)
+        {
+            await _service.DeleteItemAsync(transaction);
+        }
     }
 }

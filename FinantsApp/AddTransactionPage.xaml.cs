@@ -15,6 +15,7 @@ public partial class AddTransactionPage : ContentPage
 
 		_vm = vm;
 		_trans = null;
+		DelButton.IsVisible = false;
 	}
 	
 	public AddTransactionPage(TransactionsViewModel vm, Transaction transaction)
@@ -30,7 +31,9 @@ public partial class AddTransactionPage : ContentPage
 		ReasonPicker.SelectedItem = transaction.Reason;
 		DescriptionEditor.Text = transaction.Description;
 		AmountEntry.Text = transaction.Amount.ToString();
-	}
+
+        DelButton.IsVisible = true;
+    }
 
 	async void OnSubmitClicked(object sender, EventArgs e)
 	{
@@ -90,7 +93,10 @@ public partial class AddTransactionPage : ContentPage
 			return;
 		}
 
+        DisplayAlert("Success", "Transaction deleted successfully!", "OK");
 
+        await _vm.DeleteTransaction(_trans);
+		await Navigation.PopAsync();
 	}
 }
 
