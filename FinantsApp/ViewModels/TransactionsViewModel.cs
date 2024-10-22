@@ -25,6 +25,9 @@ namespace FinantsApp.ViewModels
         private ObservableCollection<Transaction> _sortedTransactions = [];
 
         [ObservableProperty]
+        private ObservableCollection<Transaction> _filteredTransactions = [];
+
+        [ObservableProperty]
         private decimal _totalIncome = 0;
 
         [ObservableProperty]
@@ -35,6 +38,9 @@ namespace FinantsApp.ViewModels
 
         [ObservableProperty]
         private bool _incomeGreaterThanExpenses = false;
+
+        [ObservableProperty]
+        private ObservableCollection<TransactionSummaryInfo> _summariesByTime = [];
 
         public async Task LoadAsync()
         {
@@ -48,6 +54,8 @@ namespace FinantsApp.ViewModels
             {
                 Transactions.Clear();
             }
+
+            SummariesByTime.Clear();
 
             TotalIncome = 0;
             TotalExpenses = 0;
@@ -64,12 +72,46 @@ namespace FinantsApp.ViewModels
                 {
                     TotalExpenses += transaction.Amount;
                 }
+
+                OnTransactionLoaded(transaction);
             }
 
             SortedTransactions = new(Transactions.OrderByDescending(x => x.Date));
+            SummariesByTime = new(SummariesByTime.OrderByDescending(x => x.Year).ThenByDescending(x => x.Month));
 
             IncomeDifference = TotalIncome - TotalExpenses;
             IncomeGreaterThanExpenses = IncomeDifference > 0;
+
+            FilteredTransactions.Clear();
+            int m = Math.Min(3, SortedTransactions.Count);
+            for (int i = 0 ; i < m; i++)
+            {
+                var transaction = SortedTransactions[i];
+                FilteredTransactions.Add(transaction);
+            }
+        }
+
+        private void OnTransactionLoaded(Transaction transaction)
+        {
+            foreach (var item in SummariesByTime)
+            {
+                if (item.Year != transaction.Date.Year || item.Month != transaction.Date.Month)
+                {
+                    continue;
+                }
+
+                item.Account(transaction);
+                return;
+            }
+
+            TransactionSummaryInfo summary = new()
+            {
+                Year = transaction.Date.Year,
+                Month = transaction.Date.Month
+            };
+            summary.Account(transaction);
+
+            SummariesByTime.Add(summary);
         }
 
         public async Task AddTransaction(Transaction transaction)
