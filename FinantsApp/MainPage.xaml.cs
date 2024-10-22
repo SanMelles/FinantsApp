@@ -1,34 +1,42 @@
-﻿namespace FinantsApp
+﻿using FinantsApp.ViewModels;
+
+namespace FinantsApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private TransactionsViewModel _vm;
         private readonly TransactionsListPage _listPage;
         private readonly TransactionsDifferencePage _diffPage;
         private readonly AddTransactionPage _addPage;
 
         public MainPage(
+            TransactionsViewModel vm,
             TransactionsListPage listPage,
             TransactionsDifferencePage differencePage, 
             AddTransactionPage addTransactionPage)
         {
             InitializeComponent();
+
+            BindingContext = vm;
+
+            _vm = vm;
             _listPage = listPage;
             _diffPage = differencePage;
             _addPage = addTransactionPage;
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            count++;
+            base.OnAppearing();
+            await _vm.LoadAsync();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            // Only keep the last 3 entries
+            while (_vm.SortedTransactions.Count > 3)
+            {
+                _vm.SortedTransactions.RemoveAt(_vm.SortedTransactions.Count - 1);
+            }
         }
+
 
         async void OnListOpen(object sender, EventArgs e)
         {
