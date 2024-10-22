@@ -19,12 +19,12 @@
                         <StackLayout>
                             <Label Text="{Binding Date, StringFormat='{}{0:MM/dd/yyyy}'}" FontAttributes="Bold"/>
                             <Label Text="{Binding Description}" TextColor="{StaticResource text-dimmed}"/>
-                            <Label Text="{Binding Amount, StringFormat='{0:C2}'}" FontSize="Medium" TextColor="Green">
+                            <Label Text="{Binding Amount, StringFormat='{0:C2}'}" FontSize="Medium" TextColor="{StaticResource MoneyGood}">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" 
                                                      Binding="{Binding IsIncome}" 
                                                      Value="False">
-                                        <Setter Property="TextColor" Value="Red"/>
+                                        <Setter Property="TextColor" Value="{StaticResource MoneyBad}"/>
                                         <Setter Property="Text" Value="{Binding Amount, StringFormat='-{0:C2}'}"/>
                                     </DataTrigger>
                                 </Label.Triggers>

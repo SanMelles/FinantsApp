@@ -8,20 +8,20 @@
         <StackLayout Padding="20" Spacing="15">
 
             <!-- Amount Entry -->
-            <Label Text="Amount" FontSize="Medium" />
+            <Label Text="Amount" FontSize="Medium" TextColor="{StaticResource Primary}"/>
             <Entry x:Name="AmountEntry" 
                    Placeholder="Enter amount"
                    Keyboard="Numeric" />
 
             <!-- Reason Picker -->
-            <Label Text="Reason" FontSize="Medium" />
+            <Label Text="Reason" FontSize="Medium" TextColor="{StaticResource Primary}"/>
             <Picker x:Name="ReasonPicker" 
                     Title="Select Reason"
                     ItemsSource="{Binding Reasons}">
             </Picker>
 
             <!-- Description Entry -->
-            <Label Text="Description (Optional)" FontSize="Medium" />
+            <Label Text="Description (Optional)" FontSize="Medium" TextColor="{StaticResource Primary}"/>
             <Editor x:Name="DescriptionEditor"
                     Placeholder="Enter description (optional)"
                     AutoSize="TextChanges"
@@ -31,7 +31,7 @@
             <Button Text="Submit" Clicked="OnSubmitClicked"/>
 
             <!-- Delete Button -->
-            <Button x:Name="DelButton" Text="Delete Transaction" Clicked="OnDeleteTransaction" BackgroundColor="Red"/>
+            <Button x:Name="DelButton" TextColor="White" Text="Delete Transaction" Clicked="OnDeleteTransaction" BackgroundColor="DarkRed"/>
 
         </StackLayout>
     </ContentPage.Content>
