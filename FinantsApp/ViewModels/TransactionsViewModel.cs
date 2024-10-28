@@ -18,6 +18,8 @@ namespace FinantsApp.ViewModels
             _service = service;
         }
 
+        // This is a mess lmao
+
         [ObservableProperty]
         private ObservableCollection<Transaction> _transactions = [];
 

@@ -71,6 +71,9 @@
 	  <MauiXaml Update="AddTransactionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SavingGoalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="TransactionsDifferencePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

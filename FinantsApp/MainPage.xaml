@@ -70,15 +70,20 @@
             <Button
                 x:Name="GoToDifferenceBtn"
                 Text="Income/Expenses Summary" 
-                SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnDifferenceOpen"
                 HorizontalOptions="Fill" />
             <Button
                 x:Name="addTrans"
                 Text="New Transaction" 
-                SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnAddNewTransaction"
                 HorizontalOptions="Fill" />
+            <!--
+            <Button
+                x:Name="openSavings"
+                Text="Saving Goals" 
+                Clicked="OnShowSavingGoal"
+                HorizontalOptions="Fill" />
+            -->
         </VerticalStackLayout>
     </ScrollView>
 

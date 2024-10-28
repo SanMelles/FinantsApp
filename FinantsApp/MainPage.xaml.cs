@@ -8,12 +8,14 @@ namespace FinantsApp
         private readonly TransactionsListPage _listPage;
         private readonly TransactionsDifferencePage _diffPage;
         private readonly AddTransactionPage _addPage;
+        private readonly SavingGoalPage _savingsPage;
 
         public MainPage(
             TransactionsViewModel vm,
             TransactionsListPage listPage,
             TransactionsDifferencePage differencePage, 
-            AddTransactionPage addTransactionPage)
+            AddTransactionPage addTransactionPage,
+            SavingGoalPage savingsPage)
         {
             InitializeComponent();
 
@@ -23,6 +25,7 @@ namespace FinantsApp
             _listPage = listPage;
             _diffPage = differencePage;
             _addPage = addTransactionPage;
+            _savingsPage = savingsPage;
         }
 
         protected override async void OnAppearing()
@@ -51,6 +54,11 @@ namespace FinantsApp
         async void OnAddNewTransaction(object sender, EventArgs e)
         {
             await Navigation.PushAsync(_addPage);
+        }
+
+        async void OnShowSavingGoal(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(_savingsPage);
         }
     }
 

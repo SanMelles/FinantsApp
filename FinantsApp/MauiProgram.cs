@@ -19,6 +19,7 @@ namespace FinantsApp
                 });
 
             builder.Services.AddSingleton<DatabaseContext>();
+            builder.Services.AddSingleton<SavingGoalPage>();
             builder.Services.AddSingleton<TransactionsViewModel>();
             builder.Services.AddSingleton<TransactionsListPage>();
             builder.Services.AddSingleton<TransactionsDifferencePage>();

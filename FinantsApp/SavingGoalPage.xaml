@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinantsApp.SavingGoalPage"
+             Title="Saving Goals">
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <!-- Current Goal Section -->
+        <StackLayout x:Name="CurrentGoalSection" IsVisible="False">
+            <Label Text="Current Savings Goal" FontSize="Title" HorizontalOptions="Center"/>
+            <Label x:Name="CurrentGoalLabel" FontSize="Large" HorizontalOptions="Center"/>
+            <Button Text="Remove Goal" Clicked="OnRemoveGoalClicked" />
+        </StackLayout>
+
+        <Frame x:Name="NewGoalFrame" IsVisible="True">
+            <VerticalStackLayout>
+                <Label Text="Goal Name"/>
+                <Entry x:Name="In_GoalName" Placeholder="Enter Name" Keyboard="Plain"/>
+
+                <Label Text="Enter Length"/>
+                <Entry x:Name="In_GoalLength" Placeholder="Enter Length (in Days)" Keyboard="Numeric"/>
+
+                <Label Text="Enter Target Amount"/>
+                <Entry x:Name="In_GoalAmount" Placeholder="Enter Amount" Keyboard="Numeric"/>
+
+                <!-- New Goal Button (Visible when no goal is set) -->
+                <Button Text="Set goal" Clicked="OnNewGoalClicked"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Previous Goals List -->
+        <Label Text="Previous Goals" FontSize="Title" />
+        <CollectionView x:Name="PreviousGoalsList" ItemsSource="{Binding PreviousGoals}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="0,5" BackgroundColor="LightGray">
+                        <Label Text="{Binding GoalName}" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
