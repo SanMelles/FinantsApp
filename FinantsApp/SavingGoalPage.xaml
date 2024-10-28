@@ -7,20 +7,29 @@
 
         <!-- Current Goal Section -->
         <StackLayout x:Name="CurrentGoalSection" IsVisible="False">
-            <Label Text="Current Savings Goal" FontSize="Title" HorizontalOptions="Center"/>
+            <Label Text="Current Savings Goal" HorizontalOptions="Center"/>
             <Label x:Name="CurrentGoalLabel" FontSize="Large" HorizontalOptions="Center"/>
+
+            <FlexLayout>
+                <Label x:Name="CurrentGoalProgress"/>
+                <Label Text="/"/>
+                <Label x:Name="CurrentGoalTarget"/>
+            </FlexLayout>
+
+            <ProgressBar x:Name="GoalProg" Progress="0"/>
+
             <Button Text="Remove Goal" Clicked="OnRemoveGoalClicked" />
         </StackLayout>
 
         <Frame x:Name="NewGoalFrame" IsVisible="True">
-            <VerticalStackLayout>
-                <Label Text="Goal Name"/>
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Goal Name" TextColor="{StaticResource Primary}"/>
                 <Entry x:Name="In_GoalName" Placeholder="Enter Name" Keyboard="Plain"/>
 
-                <Label Text="Enter Length"/>
+                <Label Text="Enter Length" TextColor="{StaticResource Primary}"/>
                 <Entry x:Name="In_GoalLength" Placeholder="Enter Length (in Days)" Keyboard="Numeric"/>
 
-                <Label Text="Enter Target Amount"/>
+                <Label Text="Enter Target Amount" TextColor="{StaticResource Primary}"/>
                 <Entry x:Name="In_GoalAmount" Placeholder="Enter Amount" Keyboard="Numeric"/>
 
                 <!-- New Goal Button (Visible when no goal is set) -->
@@ -33,8 +42,10 @@
         <CollectionView x:Name="PreviousGoalsList" ItemsSource="{Binding PreviousGoals}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="0,5" BackgroundColor="LightGray">
-                        <Label Text="{Binding GoalName}" />
+                    <Frame Padding="10" Margin="0,5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}"/>
+                        </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
