@@ -44,6 +44,9 @@ namespace FinantsApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<TransactionSummaryInfo> _summariesByTime = [];
 
+        [ObservableProperty]
+        private ObservableCollection<TransactionGroup> _groupsByTime = [];
+
         public async Task LoadAsync()
         {
             IEnumerable<Transaction> res = await _service.GetAllAsync<Transaction>();
@@ -90,6 +93,41 @@ namespace FinantsApp.ViewModels
             {
                 var transaction = SortedTransactions[i];
                 FilteredTransactions.Add(transaction);
+            }
+
+            GroupTransactions();
+        }
+
+        private void GroupTransactions()
+        {
+            TransactionGroup gr = new TransactionGroup();
+            _groupsByTime.Clear();
+
+            foreach (var transaction in SortedTransactions)
+            {
+                if (gr.Month == 0)
+                {
+                    gr.Month = transaction.Date.Month;
+                    gr.Year = transaction.Date.Year;
+                }
+                else if (gr.Month != transaction.Date.Month || gr.Year != transaction.Date.Year)
+                {
+                    if (gr.Transactions.Any())
+                    {
+                        _groupsByTime.Add(gr);
+                    }
+
+                    gr = new TransactionGroup();
+                    gr.Month = transaction.Date.Month;
+                    gr.Year = transaction.Date.Year;
+                }
+
+                gr.Transactions.Add(transaction);
+            }
+
+            if (gr.Transactions.Any())
+            {
+                _groupsByTime.Add(gr);
             }
         }
 
