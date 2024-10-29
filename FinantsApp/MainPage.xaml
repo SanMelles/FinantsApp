@@ -46,7 +46,7 @@
                             <DataTemplate>
                                 <Frame Margin="5,5,5,5" Padding="10" BorderColor="Gray" BackgroundColor="{StaticResource highlight-dark}" CornerRadius="5">
                                     <StackLayout>
-                                        <Label Text="{Binding Date, StringFormat='{}{0:MM/dd/yyyy}'}" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Date, StringFormat='{}{0:yyyy-MM-dd}'}" FontAttributes="Bold"/>
                                         <Label Text="{Binding Description}" TextColor="{StaticResource text-dimmed}"/>
                                         <Label Text="{Binding Amount, StringFormat='{0:C2}'}" FontSize="Medium" TextColor="{StaticResource MoneyGood}">
                                             <Label.Triggers>
@@ -78,13 +78,11 @@
                 Clicked="OnAddNewTransaction"
                 HorizontalOptions="Fill" />
             
-            <!--
             <Button
                 x:Name="openSavings"
                 Text="Saving Goals" 
                 Clicked="OnShowSavingGoal"
                 HorizontalOptions="Fill" />
-            -->
         </VerticalStackLayout>
     </ScrollView>
 
