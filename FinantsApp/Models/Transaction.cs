@@ -21,6 +21,7 @@ public class Transaction
                 TransactionReason.Salary 
                     or TransactionReason.Bonus 
                     or TransactionReason.Gift 
+                    or TransactionReason.OtherIncome 
                     or TransactionReason.InvestmentReturn => true,
 
                 _ => false,
