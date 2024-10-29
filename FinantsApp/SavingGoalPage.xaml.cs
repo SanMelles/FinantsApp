@@ -13,7 +13,10 @@ public partial class SavingGoalPage : ContentPage
     public SavingGoal? CurrentGoal { get; set; }
     public ObservableCollection<SavingGoal> PreviousGoals { get; set; } = [];
 
-	public SavingGoalPage(DatabaseContext vm, TransactionsViewModel transVm)
+    public bool ProgressNegative { get; set; } = false;
+
+
+    public SavingGoalPage(DatabaseContext vm, TransactionsViewModel transVm)
 	{
 		InitializeComponent();
 		_db = vm;
@@ -39,6 +42,7 @@ public partial class SavingGoalPage : ContentPage
             if (await IsActive(item))
             {
                 CurrentGoal = item;
+                continue;
             }
 
             PreviousGoals.Add(item);
@@ -80,13 +84,25 @@ public partial class SavingGoalPage : ContentPage
             var barProg = Math.Min(1, prog / CurrentGoal.Goal);
 
             CurrentGoalLabel.Text = CurrentGoal.Name;
-            CurrentGoalProgress.Text = $"{prog:N2}";
-            CurrentGoalTarget.Text = $"{CurrentGoal.Goal}";
-            GoalProg.Progress = barProg;
+            CurrentGoalProgress.Text = $"{prog:C2}";
+            CurrentGoalTarget.Text = $"{CurrentGoal.Goal:C2}";
+            GoalProg.Progress = (double) barProg;
+
+            ProgressNegative = prog < 0;
+
+            if (ProgressNegative)
+            {
+                CurrentGoalProgress.TextColor = Colors.Red;
+            } 
+            else
+            {
+                CurrentGoalProgress.TextColor = Colors.Green;
+            }
 
             CurrentGoalSection.IsVisible = true;
         }
 
+        NewGoalFrame.IsVisible = !CurrentGoalSection.IsVisible;
         PreviousGoalsList.ItemsSource = PreviousGoals;
     }
 
@@ -104,6 +120,10 @@ public partial class SavingGoalPage : ContentPage
 
         await _db.AddItemAsync(goal);
         await ReloadEverything();
+
+        In_GoalAmount.Text = "";
+        In_GoalLength.Text = "";
+        In_GoalName.Text = "";
     }
 
     private SavingGoal? CreateSavingGoalFromForm()

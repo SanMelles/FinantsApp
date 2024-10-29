@@ -11,12 +11,19 @@
             <Label x:Name="CurrentGoalLabel" FontSize="Large" HorizontalOptions="Center"/>
 
             <FlexLayout>
-                <Label x:Name="CurrentGoalProgress"/>
+                <Label x:Name="CurrentGoalProgress" TextColor="{StaticResource MoneyGood}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding ProgressNegative}" Value="true">
+                            <Setter Property="TextColor" Value="{StaticResource MoneyBad}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                
                 <Label Text="/"/>
-                <Label x:Name="CurrentGoalTarget"/>
+                <Label x:Name="CurrentGoalTarget" TextColor="{StaticResource MoneyGood}"/>
             </FlexLayout>
 
-            <ProgressBar x:Name="GoalProg" Progress="0"/>
+            <ProgressBar x:Name="GoalProg" Progress="0" HeightRequest="20"/>
 
             <Button Text="Remove Goal" Clicked="OnRemoveGoalClicked" />
         </StackLayout>
@@ -40,12 +47,18 @@
         <!-- Previous Goals List -->
         <Label Text="Previous Goals" FontSize="Title" />
         <CollectionView x:Name="PreviousGoalsList" ItemsSource="{Binding PreviousGoals}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical">
+                </LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="0,5">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}"/>
-                        </VerticalStackLayout>
+                        <FlexLayout>
+                            <Label Margin="0,0,10,0" TextColor="{StaticResource Gray400}" Text="{Binding CreationTime, StringFormat='{}{0:yyyy-MM-dd}'}"/>
+                            <Label TextColor="{StaticResource MoneyGood}" Text="{Binding Name}"/>
+                        </FlexLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
